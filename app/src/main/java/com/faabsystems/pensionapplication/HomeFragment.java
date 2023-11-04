@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.faabsystems.pensionapplication.databinding.FragmentHomeBinding;
 
@@ -24,15 +25,6 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater);
         return fragmentHomeBinding.getRoot();
 
-
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        fragmentHomeBinding.tv1.setOnClickListener(v ->{
-
-            Navigation.findNavController(v).navigate(HomeFragmentDirections.actionHomeFragmentToUserListFragment());
-        });
-    }
 }

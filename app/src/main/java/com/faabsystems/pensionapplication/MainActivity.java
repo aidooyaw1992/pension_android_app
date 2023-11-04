@@ -18,18 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
-
-
-
-//        activityMainBinding.tv1.setOnClickListener(v -> {
-//            Toast.makeText(this, "ewer", Toast.LENGTH_SHORT).show();
-//
-//        });
-
-
-
     }
-
-
 
 }
