@@ -27,4 +27,12 @@ public class HomeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        fragmentHomeBinding.cvPensioneers.setOnClickListener(v-> {
+            Toast.makeText(requireContext(), "Pressed", Toast.LENGTH_SHORT).show();
+        });
+    }
 }
