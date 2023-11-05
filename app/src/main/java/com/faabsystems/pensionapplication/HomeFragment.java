@@ -39,5 +39,9 @@ public class HomeFragment extends Fragment {
 
 
         });
+
+        fragmentHomeBinding.btnSettings.setOnClickListener(v->{
+            navController.navigate(R.id.action_homeFragment_to_settingsFragment);
+        });
     }
 }

@@ -14,10 +14,21 @@
         <action
             android:id="@+id/action_homeFragment_to_userListFragment"
             app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.faabsystems.pensionapplication.UserListFragment"
         android:label="fragment_user_list"
         tools:layout="@layout/fragment_user_list" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.faabsystems.pensionapplication.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
