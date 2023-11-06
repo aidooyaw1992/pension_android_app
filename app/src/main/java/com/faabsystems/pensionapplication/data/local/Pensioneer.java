@@ -1,4 +1,4 @@
-package com.faabsystems.pensionapplication;
+package com.faabsystems.pensionapplication.data.local;
 
 public class Pensioneer {
     private String id;

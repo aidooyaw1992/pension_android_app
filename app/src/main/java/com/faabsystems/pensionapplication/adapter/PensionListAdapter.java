@@ -1,4 +1,4 @@
-package com.faabsystems.pensionapplication;
+package com.faabsystems.pensionapplication.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.faabsystems.pensionapplication.data.local.Pensioneer;
+import com.faabsystems.pensionapplication.R;
 
 import java.util.ArrayList;
 
