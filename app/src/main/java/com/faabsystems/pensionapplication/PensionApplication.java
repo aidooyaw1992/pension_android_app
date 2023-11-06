@@ -5,5 +5,4 @@ import dagger.hilt.android.HiltAndroidApp;
 
 
 @HiltAndroidApp
-public class PensionApplication extends Application {
-}
+public class PensionApplication extends Application {}

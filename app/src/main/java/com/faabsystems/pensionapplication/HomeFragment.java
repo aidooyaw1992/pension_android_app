@@ -17,10 +17,8 @@ import android.widget.Toast;
 
 import com.faabsystems.pensionapplication.data.remote.response.UsersResponse;
 import com.faabsystems.pensionapplication.databinding.FragmentHomeBinding;
-import com.faabsystems.pensionapplication.util.DataStateListener;
+import com.faabsystems.pensionapplication.util.DataState;
 import com.faabsystems.pensionapplication.vm.UserViewModel;
-
-import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -59,44 +57,13 @@ public class HomeFragment extends Fragment {
             navController.navigate(R.id.action_homeFragment_to_settingsFragment);
         });
 
-        //Making post
-        /*
-        userViewModel.createUser(new User(1,"Leslie"), new DataStateListener<CreateUserResponse>() {
-            @Override
-            public void onLoading() {
-                // Handle loading state (show progress bar, etc.)
-            }
-
-            @Override
-            public void onSuccess(CreateUserResponse data) {
-                // Handle success (user created)
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                // Handle error (creation failed)
+        userViewModel.getUser().observe(getViewLifecycleOwner(), listDataState -> {
+            if (listDataState.getStatus() == DataState.Status.SUCCESS){
+                for (UsersResponse usersResponse: listDataState.getData()){
+                    Log.d("UserList", usersResponse.toString());
+                }
             }
         });
 
-         */
-
-
-        userViewModel.getUser(new DataStateListener<List<UsersResponse>>() {
-            @Override
-            public void onLoading() {
-                // Handle loading state (show progress bar, etc.)
-            }
-
-            @Override
-            public void onSuccess(List<UsersResponse> data) {
-                Log.d("Users->>>", data.get(0).getTitle());
-
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                // Handle error (creation failed)
-            }
-        });
     }
 }

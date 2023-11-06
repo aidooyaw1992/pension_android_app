@@ -1,24 +1,31 @@
 package com.faabsystems.pensionapplication.vm;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.faabsystems.pensionapplication.data.remote.User;
-import com.faabsystems.pensionapplication.data.remote.response.CreateUserResponse;
 import com.faabsystems.pensionapplication.data.remote.response.UsersResponse;
 import com.faabsystems.pensionapplication.repo.UserRepository;
 import com.faabsystems.pensionapplication.util.DataState;
-import com.faabsystems.pensionapplication.util.DataStateListener;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 @HiltViewModel
 public class UserViewModel extends ViewModel {
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     private UserRepository userRepository;
+    private MutableLiveData<DataState<List<UsersResponse>>> dataStateLiveData = new MutableLiveData<>();
+
 
 
     @Inject
@@ -26,44 +33,29 @@ public class UserViewModel extends ViewModel {
         this.userRepository = userRepository;
     }
 
-    public void createUser(User user, final DataStateListener<CreateUserResponse> dataStateListener) {
-        userRepository.createUser(user, new DataStateListener<CreateUserResponse>() {
-            @Override
-            public void onLoading() {
-                dataStateListener.onLoading(); // Notify that the operation is in progress
-            }
 
-            @Override
-            public void onSuccess(CreateUserResponse data) {
-                dataStateListener.onSuccess(data); // Handle success
-            }
+    public LiveData<DataState<List<UsersResponse>>> getUser() {
+        dataStateLiveData.setValue(new DataState<>(DataState.Status.LOADING, null, null));
 
-            @Override
-            public void onError(String errorMessage) {
-                dataStateListener.onError(errorMessage); // Handle error
-            }
-        });
+        Disposable disposable = userRepository.getUsers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(onSubscribe ->dataStateLiveData.setValue(new DataState<>(DataState.Status.LOADING, null, null)))
+                .subscribe( registrationModelResponse -> {
+                            dataStateLiveData.setValue(new DataState<>(DataState.Status.SUCCESS, registrationModelResponse, null));
+                        },
+                        error -> {
+                            dataStateLiveData.setValue(new DataState<>(DataState.Status.ERROR, null, "Request was not successful"));
+                        }
+                );
+        compositeDisposable.add(disposable);
+        return  dataStateLiveData;
     }
 
-
-
-    public void getUser(DataStateListener<List<UsersResponse>> dataStateListener) {
-        userRepository.getUsers(new DataStateListener<List<UsersResponse>>() {
-            @Override
-            public void onLoading() {
-                dataStateListener.onLoading(); // Notify that the operation is in progress
-            }
-
-            @Override
-            public void onSuccess(List<UsersResponse> data) {
-                dataStateListener.onSuccess(data); // Handle success
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                dataStateListener.onError(errorMessage); // Handle error
-            }
-        });
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        compositeDisposable.dispose();
     }
 
 
