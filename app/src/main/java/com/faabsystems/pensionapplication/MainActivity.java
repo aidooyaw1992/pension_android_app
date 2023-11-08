@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import com.faabsystems.pensionapplication.databinding.ActivityMainBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding activityMainBinding;

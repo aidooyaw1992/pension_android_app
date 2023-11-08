@@ -15,7 +15,12 @@ import android.widget.Toast;
 
 import com.faabsystems.pensionapplication.databinding.FragmentHomeBinding;
 
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class HomeFragment extends Fragment {
+
 
     private FragmentHomeBinding fragmentHomeBinding;
     @Override
@@ -24,6 +29,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
 
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater);
+
+
         return fragmentHomeBinding.getRoot();
 
     }
@@ -43,5 +50,8 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding.btnSettings.setOnClickListener(v->{
             navController.navigate(R.id.action_homeFragment_to_settingsFragment);
         });
+
+
+
     }
 }
