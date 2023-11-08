@@ -14,10 +14,37 @@
         <action
             android:id="@+id/action_homeFragment_to_userListFragment"
             app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.faabsystems.pensionapplication.UserListFragment"
         android:label="fragment_user_list"
-        tools:layout="@layout/fragment_user_list" />
+        tools:layout="@layout/fragment_user_list" >
+        <action
+            android:id="@+id/action_userListFragment_to_userBiometricRegistrationFragment"
+            app:destination="@id/userBiometricRegistrationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.faabsystems.pensionapplication.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/userBiometricRegistrationFragment"
+        android:name="com.faabsystems.pensionapplication.UserBiometricRegistrationFragment"
+        android:label="fragment_user_biometric_registration"
+        tools:layout="@layout/fragment_user_biometric_registration" >
+
+
+        <argument
+            android:name="usersResponse"
+            app:argType="com.faabsystems.pensionapplication.data.remote.response.UsersResponse"/>
+
+    </fragment>
+
 </navigation>

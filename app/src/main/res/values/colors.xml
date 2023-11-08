@@ -6,4 +6,5 @@
     <color name="background">#F7F7F8</color>
     <color name="textPrimary">#19183A</color>
     <color name="textGrey">#19183A</color>
+    <color name="grey">#eeeeee</color>
 </resources>

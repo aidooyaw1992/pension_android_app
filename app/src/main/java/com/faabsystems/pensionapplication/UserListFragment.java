@@ -1,64 +1,80 @@
 package com.faabsystems.pensionapplication;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class UserListFragment extends Fragment {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import com.faabsystems.pensionapplication.adapter.PensionListAdapter;
+import com.faabsystems.pensionapplication.data.remote.response.UsersResponse;
+import com.faabsystems.pensionapplication.databinding.FragmentUserListBinding;
+import com.faabsystems.pensionapplication.util.DataState;
+import com.faabsystems.pensionapplication.vm.UserViewModel;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import dagger.hilt.android.AndroidEntryPoint;
 
-    public UserListFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UserListFragment newInstance(String param1, String param2) {
-        UserListFragment fragment = new UserListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+@AndroidEntryPoint
+public class UserListFragment extends Fragment implements PensionListAdapter.OnItemClickListener {
+   private FragmentUserListBinding fragmentUserListBinding;
+
+    private UserViewModel userViewModel;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_list, container, false);
+
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        fragmentUserListBinding = FragmentUserListBinding.inflate(inflater);
+        return fragmentUserListBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        final NavController navController = Navigation.findNavController(view);
+
+
+        userViewModel.getUser().observe(getViewLifecycleOwner(), listDataState -> {
+            if (listDataState.getStatus() == DataState.Status.SUCCESS){
+              PensionListAdapter listAdapter = new PensionListAdapter(listDataState.getData(), this);
+                fragmentUserListBinding.rvPensionList.setHasFixedSize(true);
+                fragmentUserListBinding.rvPensionList.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                fragmentUserListBinding.rvPensionList.setAdapter(listAdapter);
+            } else if (listDataState.getStatus() == DataState.Status.ERROR) {
+                fragmentUserListBinding.userListLoader.setVisibility(View.GONE);
+            }else{
+                fragmentUserListBinding.userListLoader.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+
+
+
+        fragmentUserListBinding.myToolbar.setNavigationOnClickListener(v->{
+            navController.navigateUp();
+//            Toast.makeText(requireContext(), "Clicked back button", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    @Override
+    public void onItemClick(UsersResponse item) {
+        final NavController navController = Navigation.findNavController(requireView());
+        navController.navigate(UserListFragmentDirections.actionUserListFragmentToUserBiometricRegistrationFragment(item));
+
+
+        Toast.makeText(requireContext(),item.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }
