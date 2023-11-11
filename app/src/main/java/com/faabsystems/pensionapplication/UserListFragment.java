@@ -71,8 +71,8 @@ public class UserListFragment extends Fragment implements PensionListAdapter.OnI
 
     @Override
     public void onItemClick(UsersResponse item) {
-        final NavController navController = Navigation.findNavController(requireView());
-        navController.navigate(UserListFragmentDirections.actionUserListFragmentToUserBiometricRegistrationFragment(item));
+//        final NavController navController = Navigation.findNavController(requireView());
+//        navController.navigate(UserListFragmentDirections.actionUserListFragmentToUserBiometricRegistrationFragment(item));
 
 
         Toast.makeText(requireContext(),item.getTitle(), Toast.LENGTH_SHORT).show();

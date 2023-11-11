@@ -23,6 +23,7 @@ public class HomeFragment extends Fragment {
 
 
     private FragmentHomeBinding fragmentHomeBinding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,18 +40,17 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final NavController navController = Navigation.findNavController(view);
-        fragmentHomeBinding.cvPensioneers.setOnClickListener(v-> {
+        fragmentHomeBinding.cvEnrolBiometric.setOnClickListener(v -> {
 
-            navController.navigate(R.id.action_homeFragment_to_userListFragment);
+            navController.navigate(R.id.action_homeFragment_to_userBiometricRegistrationFragment);
             Toast.makeText(requireContext(), "Pressed", Toast.LENGTH_SHORT).show();
 
 
         });
 
-        fragmentHomeBinding.btnSettings.setOnClickListener(v->{
+        fragmentHomeBinding.btnSettings.setOnClickListener(v -> {
             navController.navigate(R.id.action_homeFragment_to_settingsFragment);
         });
-
 
 
     }

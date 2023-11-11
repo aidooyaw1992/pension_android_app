@@ -17,26 +17,27 @@ import com.faabsystems.pensionapplication.databinding.FragmentUserBiometricRegis
 
 public class UserBiometricRegistrationFragment extends Fragment {
 
-    private FragmentUserBiometricRegistrationBinding fragmentUserBiometricRegistrationBinding;
+    private FragmentUserBiometricRegistrationBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        fragmentUserBiometricRegistrationBinding = FragmentUserBiometricRegistrationBinding.inflate(inflater);
-        return fragmentUserBiometricRegistrationBinding.getRoot();
+        binding = FragmentUserBiometricRegistrationBinding.inflate(inflater);
+        return binding.getRoot();
 
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String title = UserBiometricRegistrationFragmentArgs.fromBundle(getArguments()).getUsersResponse().getTitle();
-        String userId = UserBiometricRegistrationFragmentArgs.fromBundle(getArguments()).getUsersResponse().getUserId();
-
-        Toast.makeText(requireContext(), title, Toast.LENGTH_LONG).show();
-        fragmentUserBiometricRegistrationBinding.detailsFullNameValue.setText(title);
-        fragmentUserBiometricRegistrationBinding.detailsDescriptionValue.setText(userId);
+//        String title = UserBiometricRegistrationFragmentArgs.fromBundle(getArguments()).getUsersResponse().getTitle();
+//        String userId = UserBiometricRegistrationFragmentArgs.fromBundle(getArguments()).getUsersResponse().getUserId();
+//
+//        Toast.makeText(requireContext(), title, Toast.LENGTH_LONG).show();
+//        fragmentUserBiometricRegistrationBinding.detailsFullNameValue.setText(title);
+//        fragmentUserBiometricRegistrationBinding.detailsDescriptionValue.setText(userId);
 
 
     }

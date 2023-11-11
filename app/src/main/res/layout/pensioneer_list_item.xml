@@ -4,99 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background"
-
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
-        style="@style/Widget.Material3.CardView.Elevated"
-        android:id="@+id/cv_item"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l_card_content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="5dp"
-        android:layout_margin="@dimen/_4sdp"
-        >
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/l_card_content"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:src="@drawable/old_man"
+            app:civ_border_color="#BE0000"
+            app:civ_border_width="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_gravity="center"
-            >
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
-                android:layout_width="@dimen/_48sdp"
-                android:layout_height="@dimen/_48sdp"
-                android:src="@drawable/old_man"
-                app:civ_border_width="4dp"
-                app:civ_border_color="#BE0000"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/l_profile_info"
+        <LinearLayout
+            android:id="@+id/l_profile_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/profile_image"
+            app:layout_constraintStart_toEndOf="@id/profile_image"
+            app:layout_constraintTop_toTopOf="@id/profile_image"
+            app:layout_constraintVertical_bias="0.476">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp" />
+
+            <TextView
+                android:id="@+id/item_user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@id/profile_image"
-                app:layout_constraintStart_toEndOf="@id/profile_image"
-                app:layout_constraintTop_toTopOf="@id/profile_image"
-                app:layout_constraintVertical_bias="0.476">
+                android:gravity="start"
+                android:text="User id" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_1sdp" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp" />
 
-                <TextView
-                    android:id="@+id/item_user_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="User id" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_4sdp" />
-
-                <TextView
-                    android:id="@+id/item_full_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="Full Name"
-                    tools:layout_editor_absoluteY="27dp" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_1sdp" />
-            </LinearLayout>
-
-
-            <ImageView
-                android:layout_marginStart="@dimen/_4sdp"
-                android:id="@+id/iconButton"
+            <TextView
+                android:id="@+id/item_full_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:contentDescription="details button"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintBottom_toBottomOf="@+id/l_profile_info"
-                app:layout_constraintEnd_toEndOf="@id/l_card_content"
-                app:layout_constraintTop_toTopOf="@+id/l_profile_info" />
+                android:gravity="left"
+                android:text="Full Name"
+                tools:layout_editor_absoluteY="27dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

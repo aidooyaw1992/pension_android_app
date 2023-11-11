@@ -3,8 +3,19 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#16A905</color>
+    <color name="pigmentGreen">#069e2d</color>
+    <color name="forestGreen">#058e3f</color>
+    <color name="derkSpringGreen">#04773b</color>
+    <color name="darthMouthGreen">#036016</color>
+    <color name="parkistanGreen">#03440c</color>
     <color name="background">#F7F7F8</color>
+    <color name="alert">#b80c09</color>
+    <color name="alertText">#26030e</color>
     <color name="textPrimary">#19183A</color>
+    <color name="titleText">#03254e</color>
     <color name="textGrey">#19183A</color>
+    <color name="verify">#00618c</color>
+    <color name="verifyText">#004d70</color>
     <color name="grey">#eeeeee</color>
+    <color name="darkGrey">#373737</color>
 </resources>
